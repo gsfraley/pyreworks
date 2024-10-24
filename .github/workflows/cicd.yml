@@ -22,13 +22,16 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [test]
+    strategy:
+      matrix:
+        subcrate: [pyreworks-common, pyreworks-g560-driver, pyreworks-ctl]
     steps:
     - name: Check-out repository code
       uses: actions/checkout@v4
     - name: Log-in to crates.io
       run: cargo login ${{secrets.CARGO_REGISTRY_TOKEN}}
     - name: Publish crates
-      run: cargo publish --verbose
+      run: cargo publish -p ${{matrix.subcrate}} --verbose
 
   release:
     runs-on: ubuntu-latest
