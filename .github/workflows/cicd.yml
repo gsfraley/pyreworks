@@ -15,6 +15,7 @@ jobs:
     strategy:
       matrix:
         subcrate: [common, devices/g560-driver, ctl]
+      max-parallel: 1
     steps:
     - name: Check-out repository code
       uses: actions/checkout@v4
