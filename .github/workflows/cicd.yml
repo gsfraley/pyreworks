@@ -31,7 +31,7 @@ jobs:
       run: cd ${{matrix.subcrate}} && cargo publish --verbose
   release:
     runs-on: ubuntu-latest
-    #if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [build-publish]
     steps:
     - name: Check-out repository code
