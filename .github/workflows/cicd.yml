@@ -36,13 +36,16 @@ jobs:
     steps:
     - name: Check-out repository code
       uses: actions/checkout@v4
+    - name: Set facts
+      run: echo "::set-output name=full-build-name::pyrectl-${{runner.os}}-${{runner.arch}}" | tr '[:upper:]' '[:lower:]'
     - name: Build ${{matrix.subcrate}} release binary
       run: |-
         cd ctl && cargo build --release --verbose \
           && cp target/release/pyrectl \
-                target/release/pyrectl-${{lowercase(runner.os)}}-${{lowercase(runner.arch)}}
+                target/release/${{steps["Set facts"].outputs.full-build-name}}
     - name: Create GitHub release
       uses: softprops/action-gh-release@v2
       with:
         files: |-
-          ctl/target/release/pyrectl-${{lowercase(runner.os)}}-${{lowercase(runner.arch)}}
+          ctl/target/release/${{steps["Set facts"].outputs.full-build-name}}
+
