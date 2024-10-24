@@ -43,7 +43,7 @@ jobs:
         echo "pyrectl-${{runner.os}}-${{runner.arch}}" | tr '[:upper:]' '[:lower:]'
 
         echo -n "::set-output name=build-version-ctl::"
-        cargo metadata --format-version=1 | jq -r '.packages | map(select(.name == "pyreworks-ctl")) | .[0].version'
+        cd ctl && cargo metadata --format-version=1 | jq -r '.packages | map(select(.name == "pyreworks-ctl")) | .[0].version'
     - name: Build ${{matrix.subcrate}} release binary
       run: |-
         cd ctl && cargo build --release --verbose \
