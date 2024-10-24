@@ -96,7 +96,7 @@ async fn run_cli(matches: &ArgMatches) -> anyhow::Result<()> {
                     .collect::<HashSet<_>>();
 
                 let color: Color = matches.get_one::<String>("color").unwrap().parse()?;
-                let rate: u16 = matches.get_one::<String>("rate").unwrap().parse()?;
+                let rate: u16 = num::clamp(parse_duration::parse(matches.get_one::<String>("rate").unwrap())?.as_millis(), 100, 65535) as u16;
                 let brightness: u8 = matches.get_one::<String>("brightness").unwrap().parse()?;
 
                 let commands = targets.into_iter()
@@ -112,7 +112,7 @@ async fn run_cli(matches: &ArgMatches) -> anyhow::Result<()> {
                     .flat_map(|t| Target::lookup(t))
                     .collect::<HashSet<_>>();
 
-                let rate: u16 = matches.get_one::<String>("rate").unwrap().parse()?;
+                let rate: u16 = num::clamp(parse_duration::parse(matches.get_one::<String>("rate").unwrap())?.as_millis(), 100, 65535) as u16;
                 let brightness: u8 = matches.get_one::<String>("brightness").unwrap().parse()?;
 
                 let commands = targets.into_iter()
