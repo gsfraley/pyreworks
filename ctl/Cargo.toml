@@ -3,6 +3,9 @@ name = "pyreworks-ctl"
 version = "0.1.0"
 edition = "2021"
 
+description = "Command-line utility for controlling Logitech G560 Speaker LED lights"
+license = "MIT"
+
 [[bin]]
 name = "pyrectl"
 
