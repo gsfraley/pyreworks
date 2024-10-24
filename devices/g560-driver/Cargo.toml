@@ -8,4 +8,4 @@ num = "0.4.3"
 nusb = "0.1.10"
 pyreworks-common = { version = "0.1.0", path = "../../common" }
 thiserror = "1.0.64"
-tokio = "1.40.0"
+tokio = { version = "1.40.0", features = ["full"] }

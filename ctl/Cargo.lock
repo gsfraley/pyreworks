@@ -202,17 +202,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "g560-driver"
-version = "0.1.0"
-dependencies = [
- "num",
- "nusb",
- "pyreworks-common",
- "thiserror",
- "tokio",
-]
-
-[[package]]
 name = "gimli"
 version = "0.29.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -468,9 +457,20 @@ dependencies = [
  "anyhow",
  "clap",
  "colored",
- "g560-driver",
  "nusb",
  "pyreworks-common",
+ "pyreworks-g560-driver",
+ "tokio",
+]
+
+[[package]]
+name = "pyreworks-g560-driver"
+version = "0.1.0"
+dependencies = [
+ "num",
+ "nusb",
+ "pyreworks-common",
+ "thiserror",
  "tokio",
 ]
 

@@ -2,8 +2,8 @@ use std::collections::HashSet;
 
 use clap::{arg, ArgAction, ArgMatches, Command};
 use colored::Colorize;
-use g560_driver::{Driver, Target};
 use pyreworks_common::Color;
+use pyreworks_g560_driver::{Driver, Target};
 
 #[tokio::main]
 async fn main() {
@@ -68,7 +68,7 @@ async fn run_cli(matches: &ArgMatches) -> anyhow::Result<()> {
                         .collect::<HashSet<_>>(); // Collect to HashSet to dedup targets.
 
                 let commands = targets.into_iter()
-                    .map(|t| g560_driver::Command::new_color_off(t))
+                    .map(|t| pyreworks_g560_driver::Command::new_color_off(t))
                     .collect::<Vec<_>>();
 
                 let driver = Driver::connect()?;
@@ -83,7 +83,7 @@ async fn run_cli(matches: &ArgMatches) -> anyhow::Result<()> {
                 let color: Color = matches.get_one::<String>("color").unwrap().parse()?;
 
                 let commands = targets.into_iter()
-                    .map(|t| g560_driver::Command::new_color_solid(t, color.clone()))
+                    .map(|t| pyreworks_g560_driver::Command::new_color_solid(t, color.clone()))
                     .collect::<Vec<_>>();
 
                 let driver = Driver::connect()?;
@@ -100,7 +100,7 @@ async fn run_cli(matches: &ArgMatches) -> anyhow::Result<()> {
                 let brightness: u8 = matches.get_one::<String>("brightness").unwrap().parse()?;
 
                 let commands = targets.into_iter()
-                    .map(|t| g560_driver::Command::new_color_breathe(t, color.clone(), rate, brightness))
+                    .map(|t| pyreworks_g560_driver::Command::new_color_breathe(t, color.clone(), rate, brightness))
                     .collect::<Vec<_>>();
 
                 let driver = Driver::connect()?;
@@ -116,7 +116,7 @@ async fn run_cli(matches: &ArgMatches) -> anyhow::Result<()> {
                 let brightness: u8 = matches.get_one::<String>("brightness").unwrap().parse()?;
 
                 let commands = targets.into_iter()
-                    .map(|t| g560_driver::Command::new_color_cycle(t, rate, brightness))
+                    .map(|t| pyreworks_g560_driver::Command::new_color_cycle(t, rate, brightness))
                     .collect::<Vec<_>>();
 
                 let driver = Driver::connect()?;
