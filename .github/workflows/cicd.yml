@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  build-publish:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,3 +29,29 @@ jobs:
     - name: Publish ${{matrix.subcrate}}
       if: ${{ github.ref == 'refs/heads/main' }}
       run: cd ${{matrix.subcrate}} && cargo publish --verbose
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [build-publish]
+    steps:
+    - name: Check-out repository code
+      uses: actions/checkout@v4
+    - name: Set facts
+      id: set_facts
+      run: |-
+        echo -n "::set-output name=build-full-name::"
+        echo "pyrectl-${{runner.os}}-${{runner.arch}}" | tr '[:upper:]' '[:lower:]'
+
+        echo -n "::set-output name=build-version-ctl::"
+        cd ctl && cargo metadata --format-version=1 | jq -r '.packages | map(select(.name == "pyreworks-ctl")) | .[0].version'
+    - name: Build ${{matrix.subcrate}} release binary
+      run: |-
+        cd ctl && cargo build --release --verbose \
+          && cp target/release/pyrectl \
+                target/release/${{steps.set_facts.outputs.build-full-name}}
+    - name: Create GitHub release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: v${{steps.set_facts.outputs.build-version-ctl}}
+        artifacts: ctl/target/release/${{steps.set_facts.outputs.build-full-name}}
+

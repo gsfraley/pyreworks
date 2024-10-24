@@ -4,6 +4,17 @@ This is a CLI controller for the LED colors on Logitech G560 Speaker Systems, wr
 
 **Strong credit goes to https://github.com/mijoe/g560-led for documenting the control codes and showing sensible use.**
 
+
+## Installation
+
+If you have Cargo, that's the quickest way to get the binary:
+
+```sh
+cargo install pyreworks-ctl
+```
+
+You can also grab binaries from [the latest release](https://github.com/gsfraley/pyreworks/releases/latest).
+
 ## Usage
 
 Simply put the `pyrectl` binary on the `$PATH` and run it with sudo permissions!  Currently there are direct setting controls for the G560's display LEDs:

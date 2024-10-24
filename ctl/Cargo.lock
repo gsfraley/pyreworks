@@ -511,7 +511,7 @@ dependencies = [
 
 [[package]]
 name = "pyreworks-common"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "css-color",
  "thiserror",
@@ -519,7 +519,7 @@ dependencies = [
 
 [[package]]
 name = "pyreworks-ctl"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "clap",
@@ -534,7 +534,7 @@ dependencies = [
 
 [[package]]
 name = "pyreworks-g560-driver"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "num 0.4.3",
  "nusb",
