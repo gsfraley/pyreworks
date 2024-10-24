@@ -50,10 +50,8 @@ jobs:
           && cp target/release/pyrectl \
                 target/release/${{steps.set_facts.outputs.build-full-name}}
     - name: Create GitHub release
-      uses: softprops/action-gh-release@v2
+      uses: ncipollo/release-action@v1
       with:
-        name: pyrectl ${{steps.set_facts.outputs.build-version-ctl}}
-        tag_name: ${{steps.set_facts.outputs.build-version-ctl}}
-        files: |-
-          ctl/target/release/${{steps.set_facts.outputs.build-full-name}}
+        tag: v${{steps.set_facts.outputs.build-version-ctl}}
+        artifacts: ctl/target/release/${{steps.set_facts.outputs.build-full-name}}
 
