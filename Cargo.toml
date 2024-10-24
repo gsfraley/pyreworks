@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "common",
+    "devices/g560-driver",
+    "ctl"
+]
