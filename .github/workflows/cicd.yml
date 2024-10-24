@@ -12,9 +12,13 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        subcrate: [common, devices/g560-driver, ctl]
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+    - name: Check-out repository code
+      uses: actions/checkout@v4
+    - name: Build ${{matrix.subcrate}}
+      run: cd ${{matrix.subcrate}} && cargo build --verbose
+    - name: Run tests for ${{matrix.subcrate}}
+      run: cd ${{matrix.subcrate}} && cargo test --verbose
