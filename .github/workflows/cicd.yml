@@ -25,6 +25,7 @@ jobs:
     strategy:
       matrix:
         subcrate: [pyreworks-common, pyreworks-g560-driver, pyreworks-ctl]
+      max-parallel: 1
     steps:
     - name: Check-out repository code
       uses: actions/checkout@v4
