@@ -18,7 +18,15 @@ jobs:
     steps:
     - name: Check-out repository code
       uses: actions/checkout@v4
+    - name: Log-in to crates.io
+      #if: ${{ github.ref == 'refs/heads/main' }}
+      run: cargo login
+      env:
+        CARGO_REGISTRY_TOKEN: ${{secrets.CARGO_REGISTRY_TOKEN}}
     - name: Build ${{matrix.subcrate}}
       run: cd ${{matrix.subcrate}} && cargo build --verbose
     - name: Run tests for ${{matrix.subcrate}}
       run: cd ${{matrix.subcrate}} && cargo test --verbose
+    - name: Publish ${{matrix.subcrate}}
+      #if: ${{ github.ref == 'refs/heads/main' }}
+      run: cd ${{matrix.subcrate}} && cargo publish --verbose
