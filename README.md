@@ -20,7 +20,7 @@ You can also grab binaries from [the latest release](https://github.com/gsfraley
 Simply put the `pyrectl` binary on the `$PATH` and run it with sudo permissions!  Currently there are direct setting controls for the G560's display LEDs:
 
 ```
-# pyreworks g560 set --help
+# pyrectl g560 set --help
 
 Set mode and/or state for speaker lights
 

@@ -1,6 +1,6 @@
 [package]
 name = "pyreworks-g560-driver"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2021"
 
 description = "Userspace driver code for controlling Logitech G560 Speaker LED lights"
@@ -9,6 +9,6 @@ license = "MIT"
 [dependencies]
 num = "0.4.3"
 nusb = "0.1.10"
-pyreworks-common = { version = "0.2.3", path = "../../common" }
+pyreworks-common = { version = "0.2.4", path = "../../common" }
 thiserror = "1.0.64"
 tokio = { version = "1.40.0", features = ["full"] }
